@@ -10,7 +10,7 @@ services:
     volumes:
       - pg-data:/var/lib/postgresql/18/docker
     env_file:
-      - .env
+      - stack.env
     ports:
       - "5432:5432"
     healthcheck:
@@ -19,13 +19,21 @@ services:
       timeout: 10s
       retries: 5
       start_period: 10s
+    networks:
+      - nginx-proxy-manager_default
 
   app:
     # container_name: app
     build: .
     env_file:
-      - .env
+      - stack.env
     ports:
       - "${HTTP_PORT}:${HTTP_PORT}"
     depends_on:
       - postgres
+    networks:
+      - nginx-proxy-manager_default
+
+networks:
+  nginx-proxy-manager_default:
+    external: true
