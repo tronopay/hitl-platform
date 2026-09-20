@@ -1,0 +1,13 @@
+app:
+  name: ''
+  donate: ''
+
+http:
+  port: 8080
+
+log:
+  level: 'debug'
+
+postgres:
+  max_pool_size: 20
+  url: ~

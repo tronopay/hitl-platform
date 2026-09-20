@@ -1,0 +1,313 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/tasks": {
+            "get": {
+                "description": "Get the list of the tasks",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "Show the list of the task",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dto.ShowTaskResponse"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httpd.InternalError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "To create a new task, you must provide the mandatory fields: description, type, price, and currency.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "Create a task",
+                "parameters": [
+                    {
+                        "description": "Detailed task description for the person performing the work",
+                        "name": "description",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Type of the task",
+                        "name": "type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "TAKE_PHOTO",
+                                "TAKE_VIDEO",
+                                "OTHER"
+                            ]
+                        }
+                    },
+                    {
+                        "description": "Price of the task",
+                        "name": "price",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Currency of the price",
+                        "name": "currency",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ShowTaskResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/httpd.ValidationError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httpd.InternalError"
+                        }
+                    }
+                }
+            }
+        },
+        "/tasks/{guid}": {
+            "get": {
+                "description": "Get task info by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "Show a task",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Task ID",
+                        "name": "guid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ShowTaskResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httpd.NotFound"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httpd.InternalError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete the task by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "Delete the task",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Task GUID",
+                        "name": "guid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/dto.DeleteTaskResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httpd.NotFound"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httpd.InternalError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dto.DeleteTaskResponse": {
+            "type": "object",
+            "required": [
+                "success"
+            ],
+            "properties": {
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "dto.ShowTaskResponse": {
+            "type": "object",
+            "required": [
+                "address",
+                "currency",
+                "description",
+                "id",
+                "price",
+                "status",
+                "type"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "example": "TU...123"
+                },
+                "currency": {
+                    "type": "string",
+                    "example": "TRX"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "Take a several photo of a car"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "01a09bc4-29dc-7cb3-8966-93d058554dbb"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Please make the payment within 1 hour"
+                },
+                "price": {
+                    "type": "string",
+                    "example": "10.0"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "PENDING_PAYMENT"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "TAKE_PHOTO"
+                }
+            }
+        },
+        "httpd.InternalError": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "500"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Internal error"
+                }
+            }
+        },
+        "httpd.NotFound": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "404"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Not found"
+                }
+            }
+        },
+        "httpd.ValidationError": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "422"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Validation error"
+                }
+            }
+        }
+    }
+}

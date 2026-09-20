@@ -1,0 +1,153 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Tronopay team">
+    <meta name="description" content="">
+    <title>{{template "title" .}}</title>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 96 96%22><text y=%221em%22 x=%220em%22 font-size=%2290%22 fill=%22%23fff%22>🦾</text></svg>">
+    <script src="/static/bootstrap.bundle.min.js"></script>
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        /* Minimal, unobtrusive tweaks to match the "neat Bootstrap" request */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+            /* very light slate */
+            color: #0b1e33;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f0fa 100%);
+            border-bottom: 1px solid #dee7f0;
+        }
+
+        .step-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            background: #ffffff;
+            transition: transform 0.1s ease, box-shadow 0.15s ease;
+            height: 100%;
+        }
+
+        .step-card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 20, 30, 0.08);
+            border-color: #bdd3e8;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.25rem;
+            height: 2.25rem;
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .icon-badge {
+            background: #e9f2ff;
+            color: #0d6efd;
+            border-radius: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .badge-soft-success {
+            background-color: #e2f3e6;
+            color: #0e5c2e;
+            font-weight: 500;
+        }
+
+        .badge-soft-warning {
+            background-color: #fff2dd;
+            color: #8a5b00;
+            font-weight: 500;
+        }
+
+        .border-soft {
+            border-color: #e2e8f0 !important;
+        }
+
+        footer {
+            background-color: #ffffff;
+            border-top: 1px solid #dee7f0;
+        }
+
+        .code-note {
+            font-size: 0.85rem;
+            background-color: #f1f5f9;
+            border-radius: 0.5rem;
+            padding: 0.4rem 0.75rem;
+            color: #2c3e50;
+            border-left: 3px solid #0d6efd;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-white border-bottom border-soft">
+        <div class="container">
+            <a class="navbar-brand fw-semibold d-flex align-items-center" href="#">
+                <i class="bi bi-arrow-repeat me-2 fs-4 text-primary"></i>
+                <span>{{template "title" .}}</span>
+            </a>
+            <div class="d-flex gap-2">
+                <span class="badge icon-badge d-none d-sm-inline-flex align-items-center">
+                    <i class="bi bi-robot me-1"></i> AI‑powered
+                </span>
+                <span class="badge icon-badge d-none d-sm-inline-flex align-items-center">
+                    <i class="bi bi-coin me-1"></i> TRON escrow
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    {{template "content" .}}
+
+    <!-- ========== CTA / FOOTER ========== -->
+    <footer class="py-5 mt-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-arrow-repeat fs-3 text-primary me-2"></i>
+                        <span class="fw-semibold fs-5">{{template "name" .}}</span>
+                    </div>
+                    <p class="text-secondary small mt-2 mb-0">
+                        Human-in-the-Loop tasks with on-chain settlement.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex gap-3 justify-content-md-end">
+                        <a href="#" class="text-decoration-none text-secondary small">API</a>
+                        <a href="#" class="text-decoration-none text-secondary small">Docs</a>
+                        <a href="#" class="text-decoration-none text-secondary small">Contact</a>
+                    </div>
+                    <p class="text-secondary small mt-2 mb-0">
+                        © 2026 Tronopay Human‑in‑the‑Loop Task Рlatform · Built on TRON
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+{{end}}
