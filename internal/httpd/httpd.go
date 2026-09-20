@@ -68,6 +68,7 @@ func RunServer(port string, services *service.Services) *http.Server {
 	}
 	router.GET("/", controller.MainPage)
 	router.GET("/qr/:value", controller.GenerateQRCode)
+	router.GET("/health", func(c *gin.Context) { c.JSON(http.StatusOK, gin.H{"status": "healthy"}) })
 
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	v1 := router.Group("/api/v1", RateLimiterMiddleware())
