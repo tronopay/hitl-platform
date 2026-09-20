@@ -17,7 +17,7 @@ type (
 
 	App struct {
 		Name   string `env-required:"true" yaml:"name" env:"APP_NAME"`
-		Donate string `env-required:"false" yaml:"donate" env:"APP_DONATE"`
+		Donate string `yaml:"donate" env:"APP_DONATE"`
 	}
 
 	HTTP struct {
@@ -30,7 +30,7 @@ type (
 
 	PG struct {
 		MaxPoolSize int    `env-required:"true" yaml:"max_pool_size" env:"PG_MAX_POOL_SIZE"`
-		URL         string `env-required:"true"                      env:"PG_URL"`
+		URL         string `env:"PG_URL"`
 	}
 )
 
